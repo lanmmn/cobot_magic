@@ -2,6 +2,7 @@ import torch.nn as nn
 from torch.nn import functional as F
 import torchvision.transforms as transforms
 from detr.main import build_ACT_model_and_optimizer, build_CNNMLP_model_and_optimizer, build_diffusion_model_and_optimizer
+import pdb
 
 import IPython
 e = IPython.embed
@@ -22,6 +23,8 @@ class DiffusionPolicy(nn.Module):
         if actions is not None:
             noise, noise_pred = self.model(image, depth_image, robot_state, actions, action_is_pad)
             # L2 loss
+
+            print(noise_pred.size(), noise.size())
             all_l2 = F.mse_loss(noise_pred, noise, reduction='none')
             loss = (all_l2 * ~action_is_pad.unsqueeze(-1)).mean()
 
@@ -65,6 +68,7 @@ class ACTPolicy(nn.Module):
         if actions is not None:  # training time
             actions = actions[:, :self.model.num_queries]
             action_is_pad = action_is_pad[:, :self.model.num_queries]
+            # pdb.set_trace()
 
             a_hat, (mu, logvar) = self.model(image, depth_image, robot_state, actions, action_is_pad)
 
@@ -80,6 +84,8 @@ class ACTPolicy(nn.Module):
 
             loss_dict['l1'] = l1
             if self.kl_weight != 0:
+                # import pdb
+                # pdb.set_trace()
                 total_kld, dim_wise_kld, mean_kld = kl_divergence(mu, logvar)
                 loss_dict['kl'] = total_kld[0]
                 loss_dict['loss'] = loss_dict['l1'] + loss_dict['kl'] * self.kl_weight

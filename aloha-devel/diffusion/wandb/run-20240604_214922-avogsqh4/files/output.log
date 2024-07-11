@@ -1,0 +1,45 @@
+number of parameters: 6.908954e+07
+number of parameters: 91.48M
+Epoch 0
+policy config: {'lr': 4e-05, 'lr_backbone': 4e-05, 'backbone': 'resnet18', 'masks': False, 'weight_decay': 0.0001, 'dilation': False, 'position_embedding': 'sine', 'loss_function': 'l1', 'chunk_size': 100, 'camera_names': ['cam_high', 'cam_right_wrist'], 'use_depth_image': False, 'use_robot_base': False, 'observation_horizon': 2, 'action_horizon': 8, 'num_inference_timesteps': 10, 'ema_power': 0.75, 'hidden_dim': 512, 'select_arm': 'right'}
+State_dim: 7
+torch.Size([4, 200, 7]) torch.Size([4, 135])
+/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+  0%|                                                                                       | 0/5000 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "train.py", line 377, in <module>
+    main()
+  File "train.py", line 374, in main
+    train(args)
+  File "train.py", line 142, in train
+    best_ckpt_info = train_process(train_dataloader, val_dataloader, config, stats,save_model_dir)
+  File "train.py", line 235, in train_process
+    forward_dict, result = forward_pass(policy_config, data, policy)
+  File "train.py", line 203, in forward_pass
+    return policy(image_data, image_depth_data, qpos_data, action_data, action_is_pad)
+  File "/home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/policy.py", line 24, in __call__
+    noise, noise_pred = self.model(image, depth_image, robot_state, actions, action_is_pad)
+  File "/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/detr/models/detr_vae.py", line 341, in forward
+    noise_pred = nets['policy']['noise_pred_net'](noisy_actions, timesteps, global_cond=obs_cond)
+  File "/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jyxc/GitHub/act-plus-plus/robomimic/robomimic/algo/diffusion_policy.py", line 681, in forward
+    x = resnet(x, global_feature)
+  File "/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jyxc/GitHub/act-plus-plus/robomimic/robomimic/algo/diffusion_policy.py", line 549, in forward
+    embed = self.cond_encoder(cond)
+  File "/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+  File "/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/jyxc/mambaforge/envs/aloha/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (4x391 and 526x512)

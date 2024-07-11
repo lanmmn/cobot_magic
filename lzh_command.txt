@@ -1,0 +1,63 @@
+
+
+——————————————————————* train command *——————————————————————
+模版：python act/train.py --dataset_dir ~/data --pretrain_ckpt policy_best.ckpt --ckpt_dir ~/train_dir/ --num_episodes 20 --batch_size 10 --num_epochs 2000 
+
+初始训练：
+python train.py  --dataset_dir /home/jyxc/GitHub/act-plus-plus/data  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_bottle2_right  --batch_size 1 --num_epochs 5000 --num_episodes 400 --task_name single_arm_bottle2 --pretrain_ckpt /home/jyxc/GitHub/act-plus-plus/trainings_our_bottle2_right/policy_epoch_2700_seed_0.ckpt
+
+
+fruit_hand_over:
+python train.py  --dataset_dir /home/jyxc/下载/  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_jd_fruit_handover  --batch_size 1 --num_epochs 5000 --num_episodes 50 --task_name Fruit_handover
+
+Single_fruit_pick:
+python train.py  --dataset_dir /home/jyxc/下载/  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_jd_single_fruit_pick  --batch_size 1 --num_epochs 5000 --num_episodes 50 --task_name Single_fruit_pick
+
+Multiple_fruit_pick:
+python train.py  --dataset_dir /home/jyxc/下载/multi_fruit_pick  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_jd_multiple_fruit_pick  --batch_size 1 --num_epochs 5000 --num_episodes 50 --task_name multiple_fruits_pick
+
+
+2024.6.21,
+python train.py --dataset_dir /home/jyxc/Datasets/megvii_aloha/ --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_pumkin_pick_right_cs32_epi55_1camera_200frame_bs8_lr2_lrbb2_depth --num_episodes 55 --task_name pumkin_pick-Suc_post/ --batch_size 8 --lr 2e-05 --lr_backbone 2e-05
+python train.py --dataset_dir /media/jyxc/Aloha/ --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_pumkin_pick_right_cs32_epi55_1camera_200frame_bs8_lr2_lrbb2_depth --num_episodes 55 --task_name pumkin_pick-post_depth --batch_size 8 --lr 2e-05 --num_epochs 2000 --lr_backbone 2e-05 --use_depth_image True
+
+
+
+
+2024.6.25
+Single_pick_2cube:
+python train.py --dataset_dir /media/jyxc/T5\ EVO/  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_single_pick_2cube_right_cs32_epi68_1camera_330frame_bs8_lr2_lrbb2 --num_episodes 68 --task_name Single_pick_2cube-post --batch_size 8 --lr 2e-05 --num_epochs 3000 --lr_backbone 2e-05 
+pumkin_pick-Suc_post:
+python train.py --dataset_dir /home/jyxc/Datasets/megvii_aloha/ --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_pumkin_pick_right_cs16_epi55_1camera_200frame_bs8_lr2_lrbb2_depth --num_episodes 55 --task_name pumkin_pick-Suc_post/ --batch_size 8 --lr 2e-05 --lr_backbone 2e-05
+python train.py --dataset_dir /media/jyxc/T5\ EVO/  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_cheese_pick_cs32_epi47_1camera_190frame_bs8_lr2_lrbb2 --num_episodes 47 --task_name international_cheese-post --batch_size 8 --lr 2e-05 --num_epochs 3000 --lr_backbone 2e-05 
+python train.py --dataset_dir /media/jyxc/T5\ EVO/  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_clothes_cs32_epi76_3camera_790frame_bs8_lr2_lrbb2 --num_episodes 75 --task_name clean_clothes-post --batch_size 8 --lr 2e-05 --num_epochs 3500 --lr_backbone 2e-05 
+
+run 2cam first:
+python train.py --dataset_dir /media/jyxc/T5\ EVO/  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_cheese_pick_cs32_epi47_left_2camera_190frame_bs8_lr2_lrbb2 --num_episodes 47 --task_name international_cheese-post --batch_size 8 --lr 2e-05 --num_epochs 2500 --lr_backbone 2e-05 
+——————————————————————* oss command *——————————————————————
+upload: (jyxc, 4090)
+oss cp /home/jyxc/GitHub/act-plus-plus/<dir_name>/dataset_stats.pkl s3://lanzihan/ckpt/<dir_name>/
+oss cp /home/jyxc/GitHub/act-plus-plus/<dir_name>/policy_epoch_<number>_seed_0.ckpt s3://lanzihan/ckpt/<dir_name>/
+test example: 
+oss cp /home/jyxc/GitHub/act-plus-plus/trainings_our_pumkin_pick_right_cs32_epi55_1camera_200frame_bs8_lr2_lrbb2_depth/policy_epoch_1900_seed_0.ckpt s3://lanzihan/ckpt/trainings_our_pumkin_pick_right_cs32_epi55_1camera_200frame_bs8_lr2_lrbb2_depth/
+oss cp /home/jyxc/GitHub/act-plus-plus/trainings_our_pumkin_pick_right_cs32_epi55_2camera_200frame_bs8_lr2_lrbb2/policy_epoch_1500_seed_0.ckpt s3://lanzihan/ckpt/trainings_our_pumkin_pick_right_cs32_epi55_2camera_200frame_bs8_lr2_lrbb2/
+oss cp /home/jyxc/GitHub/act-plus-plus/trainings_our_pumkin_pick_right_cs48_epi55_2camera_200frame_bs8_lr2_lrbb2/policy_epoch_2000_seed_0.ckpt s3://lanzihan/ckpt/trainings_our_pumkin_pick_right_cs32_epi55_2camera_200frame_bs8_lr2_lrbb2/
+
+
+oss cp /home/jyxc/GitHub/act-plus-plus/trainings_our_single_pick_2cube_right_cs32_epi68_2camera_330frame_bs8_lr2_lrbb2_step/dataset_stats.pkl s3://lanzihan/ckpt/trainings_our_single_pick_2cube_right_cs32_epi68_2camera_330frame_bs8_lr2_lrbb2_step/
+oss cp /home/jyxc/GitHub/act-plus-plus/trainings_our_single_pick_2cube_right_cs32_epi68_2camera_330frame_bs8_lr2_lrbb2_step/policy_epoch_3000_seed_0.ckpt s3://lanzihan/ckpt/trainings_our_single_pick_2cube_right_cs32_epi68_2camera_330frame_bs8_lr2_lrbb2_step/
+
+
+oss cp /home/jyxc/GitHub/act-plus-plus/trainings_our_two_pick_2cube_right_cs32_epi73_1camera_290frame_bs8_lr2_lrbb2/dataset_stats.pkl s3://lanzihan/ckpt/trainings_our_two_pick_2cube_right_cs32_epi73_1camera_290frame_bs8_lr2_lrbb2/
+
+oss cp /home/jyxc/GitHub/act-plus-plus/trainings_our_cheese_pick_cs32_epi47_left_2camera_190frame_bs8_lr2_lrbb2/policy_epoch_1500_seed_0.ckpt s3://lanzihan/ckpt/trainings_our_cheese_pick_cs32_epi47_left_2camera_190frame_bs8_lr2_lrbb2/
+oss cp /home/jyxc/GitHub/act-plus-plus/trainings_our_cheese_pick_cs32_epi47_left_2camera_190frame_bs8_lr2_lrbb2/dataset_stats.pkl s3://lanzihan/ckpt/trainings_our_cheese_pick_cs32_epi47_left_2camera_190frame_bs8_lr2_lrbb2/
+
+download: (agx)
+oss sync s3://lanzihan/ckpt/<dir_name>/ target_path(home/media/, /home/agilex/ACT/cobot_magic/)
+test example: 
+oss sync s3://lanzihan/ckpt/trainings_our_pumkin_pick_right_cs32_epi55_2camera_200frame_bs8_lr2_lrbb2/  /home/agilex/ACT/cobot_magic/trainings_our_pumkin_pick_right_cs32_epi55_2camera_200frame_bs8_lr2_lrbb2/
+oss sync s3://lanzihan/ckpt/trainings_our_single_pick_2cube_right_cs32_epi68_1camera_330frame_bs8_lr2_lrbb2/ /home/agilex/ACT/cobot_magic/trainings_our_single_pick_2cube_right_cs32_epi68_1camera_330frame_bs8_lr2_lrbb2/
+oss sync s3://lanzihan/ckpt/trainings_our_single_pick_2cube_right_cs32_epi68_2camera_330frame_bs8_lr2_lrbb2/ /home/agilex/ACT/cobot_magic/trainings_our_single_pick_2cube_right_cs32_epi68_2camera_330frame_bs8_lr2_lrbb2/
+oss sync s3://lanzihan/ckpt/trainings_our_single_pick_2cube_right_cs32_epi68_2camera_330frame_bs8_lr2_lrbb2_step/ /home/agilex/ACT/cobot_magic/trainings_our_single_pick_2cube_right_cs32_epi68_2camera_330frame_bs8_lr2_lrbb2_step/
+oss sync s3://lanzihan/ckpt/trainings_our_cheese_pick_cs32_epi47_left_2camera_190frame_bs8_lr2_lrbb2/ /home/agilex/ACT/cobot_magic/trainings_our_cheese_pick_cs32_epi47_left_2camera_190frame_bs8_lr2_lrbb2/

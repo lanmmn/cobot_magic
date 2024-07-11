@@ -1,0 +1,144 @@
+2024-06-04 21:59:03,643 INFO    StreamThr :670116 [internal.py:wandb_internal():86] W&B internal server running at pid: 670116, started at: 2024-06-04 21:59:03.642723
+2024-06-04 21:59:03,646 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: status
+2024-06-04 21:59:03,650 INFO    WriterThread:670116 [datastore.py:open_for_write():87] open: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/run-5gbi9m93.wandb
+2024-06-04 21:59:03,651 DEBUG   SenderThread:670116 [sender.py:send():379] send: header
+2024-06-04 21:59:03,672 DEBUG   SenderThread:670116 [sender.py:send():379] send: run
+2024-06-04 21:59:04,326 INFO    SenderThread:670116 [dir_watcher.py:__init__():211] watching files in: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files
+2024-06-04 21:59:04,326 INFO    SenderThread:670116 [sender.py:_start_run_threads():1124] run started: 5gbi9m93 with start time 1717509543.644016
+2024-06-04 21:59:04,339 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: check_version
+2024-06-04 21:59:04,339 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: check_version
+2024-06-04 21:59:04,961 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: run_start
+2024-06-04 21:59:04,976 DEBUG   HandlerThread:670116 [system_info.py:__init__():26] System info init
+2024-06-04 21:59:04,976 DEBUG   HandlerThread:670116 [system_info.py:__init__():41] System info init done
+2024-06-04 21:59:04,977 INFO    HandlerThread:670116 [system_monitor.py:start():194] Starting system monitor
+2024-06-04 21:59:04,977 INFO    SystemMonitor:670116 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-06-04 21:59:04,977 INFO    HandlerThread:670116 [system_monitor.py:probe():214] Collecting system info
+2024-06-04 21:59:04,978 INFO    SystemMonitor:670116 [interfaces.py:start():190] Started cpu monitoring
+2024-06-04 21:59:04,979 INFO    SystemMonitor:670116 [interfaces.py:start():190] Started disk monitoring
+2024-06-04 21:59:04,979 INFO    SystemMonitor:670116 [interfaces.py:start():190] Started gpu monitoring
+2024-06-04 21:59:04,979 INFO    SystemMonitor:670116 [interfaces.py:start():190] Started memory monitoring
+2024-06-04 21:59:04,979 INFO    SystemMonitor:670116 [interfaces.py:start():190] Started network monitoring
+2024-06-04 21:59:04,991 DEBUG   HandlerThread:670116 [system_info.py:probe():150] Probing system
+2024-06-04 21:59:04,997 DEBUG   HandlerThread:670116 [system_info.py:_probe_git():135] Probing git
+2024-06-04 21:59:05,012 DEBUG   HandlerThread:670116 [system_info.py:_probe_git():143] Probing git done
+2024-06-04 21:59:05,012 DEBUG   HandlerThread:670116 [system_info.py:probe():198] Probing system done
+2024-06-04 21:59:05,012 DEBUG   HandlerThread:670116 [system_monitor.py:probe():223] {'os': 'Linux-6.5.0-28-generic-x86_64-with-glibc2.10', 'python': '3.8.19', 'heartbeatAt': '2024-06-04T13:59:04.991801', 'startedAt': '2024-06-04T13:59:03.634329', 'docker': None, 'cuda': None, 'args': ('--dataset_dir', '/home/jyxc/GitHub/act-plus-plus/data', '--ckpt_dir', '/home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/model_save', '--batch_size', '4', '--num_epochs', '5000', '--num_episodes', '350', '--task_name', 'single_arm_bottle2-post', '--policy_class', 'Diffusion', '--select_arm', 'right', '--observation_horizon', '2'), 'state': 'running', 'program': 'train.py', 'codePathLocal': 'train.py', 'codePath': 'aloha-devel/diffusion/train.py', 'git': {'remote': 'https://github.com/agilexrobotics/cobot_magic.git', 'commit': '105b4f356de06747baafe243962e6a8b49fc0436'}, 'email': 'maoweixin@megvii.com', 'root': '/home/jyxc/GitHub/cobot_magic', 'host': 'jyxc-LEGION-REN9000K-34IRZ', 'username': 'jyxc', 'executable': '/home/jyxc/mambaforge/envs/aloha/bin/python', 'cpu_count': 24, 'cpu_count_logical': 32, 'cpu_freq': {'current': 1455.790875, 'min': 800.0, 'max': 4937.5}, 'cpu_freq_per_core': [{'current': 800.261, 'min': 800.0, 'max': 5500.0}, {'current': 1222.687, 'min': 800.0, 'max': 5500.0}, {'current': 1222.384, 'min': 800.0, 'max': 5500.0}, {'current': 800.0, 'min': 800.0, 'max': 5500.0}, {'current': 1225.465, 'min': 800.0, 'max': 5500.0}, {'current': 1215.652, 'min': 800.0, 'max': 5500.0}, {'current': 800.0, 'min': 800.0, 'max': 5500.0}, {'current': 1368.988, 'min': 800.0, 'max': 5500.0}, {'current': 1380.483, 'min': 800.0, 'max': 5800.0}, {'current': 1400.0, 'min': 800.0, 'max': 5800.0}, {'current': 886.148, 'min': 800.0, 'max': 5800.0}, {'current': 1400.0, 'min': 800.0, 'max': 5800.0}, {'current': 1190.476, 'min': 800.0, 'max': 5500.0}, {'current': 1426.079, 'min': 800.0, 'max': 5500.0}, {'current': 969.219, 'min': 800.0, 'max': 5500.0}, {'current': 1474.593, 'min': 800.0, 'max': 5500.0}, {'current': 2864.803, 'min': 800.0, 'max': 4300.0}, {'current': 1399.659, 'min': 800.0, 'max': 4300.0}, {'current': 1399.408, 'min': 800.0, 'max': 4300.0}, {'current': 2228.143, 'min': 800.0, 'max': 4300.0}, {'current': 1080.207, 'min': 800.0, 'max': 4300.0}, {'current': 1196.116, 'min': 800.0, 'max': 4300.0}, {'current': 799.989, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 1033.898, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 1037.77, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}, {'current': 800.0, 'min': 800.0, 'max': 4300.0}], 'disk': {'/': {'total': 1674.6598739624023, 'used': 1413.7283973693848}}, 'gpu': 'NVIDIA GeForce RTX 4090', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4090', 'memory_total': 25757220864}], 'memory': {'total': 62.48347854614258}}
+2024-06-04 21:59:05,013 INFO    HandlerThread:670116 [system_monitor.py:probe():224] Finished collecting system info
+2024-06-04 21:59:05,013 INFO    HandlerThread:670116 [system_monitor.py:probe():227] Publishing system info
+2024-06-04 21:59:05,013 DEBUG   HandlerThread:670116 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-06-04 21:59:05,327 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/conda-environment.yaml
+2024-06-04 21:59:06,894 DEBUG   HandlerThread:670116 [system_info.py:_save_conda():222] Saving conda packages done
+2024-06-04 21:59:06,896 INFO    HandlerThread:670116 [system_monitor.py:probe():229] Finished publishing system info
+2024-06-04 21:59:06,908 DEBUG   SenderThread:670116 [sender.py:send():379] send: files
+2024-06-04 21:59:06,908 INFO    SenderThread:670116 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-06-04 21:59:07,001 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: python_packages
+2024-06-04 21:59:07,001 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: python_packages
+2024-06-04 21:59:07,001 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-04 21:59:07,002 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: stop_status
+2024-06-04 21:59:07,003 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-04 21:59:07,327 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/conda-environment.yaml
+2024-06-04 21:59:07,327 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/wandb-metadata.json
+2024-06-04 21:59:07,327 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/requirements.txt
+2024-06-04 21:59:07,446 DEBUG   SenderThread:670116 [sender.py:send():379] send: telemetry
+2024-06-04 21:59:07,908 INFO    wandb-upload_0:670116 [upload_job.py:push():131] Uploaded file /tmp/tmpqkjbxfmxwandb/8oo4fqhw-wandb-metadata.json
+2024-06-04 21:59:08,327 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/output.log
+2024-06-04 21:59:08,792 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 21:59:08,827 DEBUG   SenderThread:670116 [sender.py:send():379] send: exit
+2024-06-04 21:59:08,827 INFO    SenderThread:670116 [sender.py:send_exit():586] handling exit code: 1
+2024-06-04 21:59:08,827 INFO    SenderThread:670116 [sender.py:send_exit():588] handling runtime: 3
+2024-06-04 21:59:08,828 INFO    SenderThread:670116 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-04 21:59:08,828 INFO    SenderThread:670116 [sender.py:send_exit():594] send defer
+2024-06-04 21:59:08,828 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:08,828 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 0
+2024-06-04 21:59:08,828 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:08,828 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-06-04 21:59:08,828 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 1
+2024-06-04 21:59:08,828 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:08,828 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 1
+2024-06-04 21:59:08,829 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:08,829 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-06-04 21:59:08,829 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 2
+2024-06-04 21:59:08,829 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:08,829 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 2
+2024-06-04 21:59:08,829 INFO    HandlerThread:670116 [system_monitor.py:finish():203] Stopping system monitor
+2024-06-04 21:59:08,829 DEBUG   SystemMonitor:670116 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-06-04 21:59:08,829 INFO    HandlerThread:670116 [interfaces.py:finish():202] Joined cpu monitor
+2024-06-04 21:59:08,829 DEBUG   SystemMonitor:670116 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-06-04 21:59:08,829 INFO    HandlerThread:670116 [interfaces.py:finish():202] Joined disk monitor
+2024-06-04 21:59:08,829 DEBUG   SystemMonitor:670116 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-06-04 21:59:08,884 INFO    HandlerThread:670116 [interfaces.py:finish():202] Joined gpu monitor
+2024-06-04 21:59:08,884 INFO    HandlerThread:670116 [interfaces.py:finish():202] Joined memory monitor
+2024-06-04 21:59:08,885 INFO    HandlerThread:670116 [interfaces.py:finish():202] Joined network monitor
+2024-06-04 21:59:08,885 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:08,885 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-06-04 21:59:08,885 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 3
+2024-06-04 21:59:08,885 DEBUG   SenderThread:670116 [sender.py:send():379] send: stats
+2024-06-04 21:59:08,885 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:08,885 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 3
+2024-06-04 21:59:08,885 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:08,885 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-06-04 21:59:08,885 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 4
+2024-06-04 21:59:08,886 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:08,886 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 4
+2024-06-04 21:59:08,886 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:08,886 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-06-04 21:59:08,886 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 5
+2024-06-04 21:59:08,886 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:08,886 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 5
+2024-06-04 21:59:08,886 DEBUG   SenderThread:670116 [sender.py:send():379] send: summary
+2024-06-04 21:59:08,886 INFO    SenderThread:670116 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-04 21:59:08,886 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:08,886 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-06-04 21:59:08,886 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 6
+2024-06-04 21:59:08,886 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:08,886 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 6
+2024-06-04 21:59:08,886 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:08,886 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-06-04 21:59:08,888 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 21:59:09,153 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 7
+2024-06-04 21:59:09,153 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:09,154 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 7
+2024-06-04 21:59:09,154 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:09,154 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-06-04 21:59:09,328 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/config.yaml
+2024-06-04 21:59:09,328 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_created():271] file/dir created: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/wandb-summary.json
+2024-06-04 21:59:09,827 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: poll_exit
+2024-06-04 21:59:10,328 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/output.log
+2024-06-04 21:59:11,452 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 8
+2024-06-04 21:59:11,452 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: poll_exit
+2024-06-04 21:59:11,453 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:11,453 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 8
+2024-06-04 21:59:11,454 DEBUG   SenderThread:670116 [sender.py:send_request():406] send_request: defer
+2024-06-04 21:59:11,454 INFO    SenderThread:670116 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-06-04 21:59:11,454 INFO    SenderThread:670116 [job_builder.py:build():318] Attempting to build job artifact
+2024-06-04 21:59:11,454 INFO    SenderThread:670116 [job_builder.py:_get_source_type():455] is repo sourced job
+2024-06-04 21:59:11,494 INFO    SenderThread:670116 [job_builder.py:build():431] adding wandb-job metadata file
+2024-06-04 21:59:11,508 INFO    SenderThread:670116 [sender.py:transition_state():614] send defer: 9
+2024-06-04 21:59:11,509 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: defer
+2024-06-04 21:59:11,509 INFO    HandlerThread:670116 [handler.py:handle_request_defer():172] handle defer: 9
+2024-06-04 21:59:11,510 DEBUG   SenderThread:670116 [sender.py:send():379] send: artifact
+2024-06-04 21:59:11,828 DEBUG   HandlerThread:670116 [handler.py:handle_request():146] handle_request: poll_exit
+2024-06-04 21:59:12,329 INFO    Thread-12 :670116 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/output.log
+2024-06-04 21:59:12,655 WARNING StreamThr :670116 [internal.py:is_dead():414] Internal process exiting, parent pid 669994 disappeared
+2024-06-04 21:59:12,655 ERROR   StreamThr :670116 [internal.py:wandb_internal():152] Internal process shutdown.
+2024-06-04 21:59:12,744 INFO    SenderThread:670116 [sender.py:send_artifact():1468] sent artifact job-https___github.com_agilexrobotics_cobot_magic.git_aloha-devel_diffusion_train.py - {'id': 'QXJ0aWZhY3Q6ODU5OTE5ODY1', 'state': 'COMMITTED', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjE4MjExODg5Mg==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6ODU5OTE5ODY1', 'versionIndex': 0}}}
+2024-06-04 21:59:12,744 INFO    SenderThread:670116 [sender.py:finish():1546] shutting down sender
+2024-06-04 21:59:12,744 INFO    SenderThread:670116 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-06-04 21:59:12,829 INFO    HandlerThread:670116 [handler.py:finish():866] shutting down handler
+2024-06-04 21:59:12,829 INFO    WriterThread:670116 [datastore.py:close():296] close: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/run-5gbi9m93.wandb
+2024-06-04 21:59:13,330 INFO    SenderThread:670116 [dir_watcher.py:finish():388] scan: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files
+2024-06-04 21:59:13,331 INFO    SenderThread:670116 [dir_watcher.py:finish():402] scan save: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/config.yaml config.yaml
+2024-06-04 21:59:13,331 INFO    SenderThread:670116 [dir_watcher.py:finish():402] scan save: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/output.log output.log
+2024-06-04 21:59:13,335 INFO    SenderThread:670116 [dir_watcher.py:finish():402] scan save: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/wandb-metadata.json wandb-metadata.json
+2024-06-04 21:59:13,335 INFO    SenderThread:670116 [dir_watcher.py:finish():402] scan save: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/wandb-summary.json wandb-summary.json
+2024-06-04 21:59:13,339 INFO    SenderThread:670116 [dir_watcher.py:finish():402] scan save: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/conda-environment.yaml conda-environment.yaml
+2024-06-04 21:59:13,342 INFO    SenderThread:670116 [dir_watcher.py:finish():402] scan save: /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/requirements.txt requirements.txt
+2024-06-04 21:59:13,346 INFO    SenderThread:670116 [file_pusher.py:finish():172] shutting down file pusher
+2024-06-04 21:59:13,346 INFO    SenderThread:670116 [file_pusher.py:join():178] waiting for file pusher
+2024-06-04 21:59:13,905 INFO    wandb-upload_0:670116 [upload_job.py:push():131] Uploaded file /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/config.yaml
+2024-06-04 21:59:14,057 INFO    wandb-upload_1:670116 [upload_job.py:push():131] Uploaded file /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/output.log
+2024-06-04 21:59:14,150 INFO    wandb-upload_2:670116 [upload_job.py:push():131] Uploaded file /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/wandb-summary.json
+2024-06-04 21:59:14,163 INFO    wandb-upload_4:670116 [upload_job.py:push():131] Uploaded file /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/requirements.txt
+2024-06-04 21:59:14,198 INFO    wandb-upload_3:670116 [upload_job.py:push():131] Uploaded file /home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/wandb/run-20240604_215903-5gbi9m93/files/conda-environment.yaml
+2024-06-04 21:59:14,848 INFO    SenderThread:670116 [file_stream.py:finish():614] file stream finish called
+2024-06-04 21:59:15,108 INFO    SenderThread:670116 [file_stream.py:finish():618] file stream finish is done

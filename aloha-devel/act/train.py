@@ -6,14 +6,35 @@ import argparse
 import matplotlib.pyplot as plt
 from copy import deepcopy
 from tqdm import tqdm
+import pdb
 
-from utils import load_data 
+
+from utils import load_data, load_data_kfolder
 from utils import compute_dict_mean, set_seed, detach_dict
 from policy import ACTPolicy, CNNMLPPolicy, DiffusionPolicy
 
 import sys
 sys.path.append("./")
 
+def val_plot(actual_actions, predicted_actions, ckpt_dir):
+    actual_actions = np.concatenate(actual_actions, axis=0)
+    predicted_actions = np.concatenate(predicted_actions, axis=0)
+
+    validation_dir = os.path.join(ckpt_dir, 'validation')
+    os.makedirs(validation_dir, exist_ok=True)
+
+    # 绘制实际动作和预测动作的对比图
+    plt.figure(figsize=(12, 6))
+    plt.plot(actual_actions, label='Actual Actions')
+    plt.plot(predicted_actions, label='Predicted Actions')
+    plt.legend()
+    plt.title(f'Epoch {epoch} - Validation')
+    plt.xlabel('Time Step')
+    plt.ylabel('Action Value')
+    plt.grid()
+    plt.savefig(os.path.join(validation_dir, f'epoch_{epoch}_validation.png'))
+    print("val plot saved.")
+    plt.close()
 
 def train(args):
     set_seed(1)
@@ -24,6 +45,7 @@ def train(args):
         args.task_name: {
             'dataset_dir': os.path.join(DATA_DIR, args.task_name),
             'camera_names': ['cam_high', 'cam_left_wrist', 'cam_right_wrist'],
+            # 'camera_names': ['cam_high', 'cam_right_wrist'],
             'num_episodes': args.num_episodes
         }
     }
@@ -123,6 +145,139 @@ def train(args):
     torch.save(best_state_dict, ckpt_path)
     print(f'Best ckpt, val loss {min_val_loss:.6f} @ epoch{best_epoch}')
 
+def train_kfold(args):
+    """* if want original train func, please refer to github.com/cobot_magic"""
+    set_seed(1)
+
+    DATA_DIR = os.path.expanduser(args.dataset_dir) 
+    
+    TASK_CONFIGS = {
+        args.task_name: {
+            'dataset_dir': os.path.join(DATA_DIR, args.task_name),
+            'camera_names': ['cam_high', 'cam_left_wrist', 'cam_right_wrist'],
+            # 'camera_names': ['cam_high', 'cam_right_wrist'],
+            # 'camera_names': ['cam_high', 'cam_left_wrist'],
+            # 'camera_names': ['cam_high'],
+
+            'num_episodes': args.num_episodes
+        }
+    }
+
+    task_config = TASK_CONFIGS[args.task_name]
+    
+    dataset_dir = task_config['dataset_dir']
+    num_episodes = task_config['num_episodes']
+    camera_names = task_config['camera_names']
+
+    # fixed parameters
+    if args.policy_class == 'ACT':
+        policy_config = {'lr': args.lr,
+                         'lr_backbone': args.lr_backbone,
+                         'backbone': args.backbone,
+                         'masks': args.masks,
+                         'weight_decay': args.weight_decay,
+                         'dilation': args.dilation,
+                         'position_embedding': args.position_embedding,
+                         'loss_function': args.loss_function,
+                         'chunk_size': args.chunk_size,     # chunk_size
+                         'camera_names': camera_names,
+                         'use_depth_image': args.use_depth_image,
+                         'use_robot_base': args.use_robot_base,
+                         'kl_weight': args.kl_weight,        # kl
+                         'hidden_dim': args.hidden_dim,      # Hidden dim
+                         'dim_feedforward': args.dim_feedforward,
+                         'enc_layers': args.enc_layers,
+                         'dec_layers': args.dec_layers,
+                         'nheads': args.nheads,
+                         'dropout': args.dropout,
+                         'pre_norm': args.pre_norm,
+                         'select_arm': args.select_arm
+                         }
+    elif args.policy_class == 'CNNMLP':
+        policy_config = {'lr': args.lr,
+                         'lr_backbone': args.lr_backbone,
+                         'backbone': args.backbone,
+                         'masks': args.masks,
+                         'weight_decay': args.weight_decay,
+                         'dilation': args.dilation,
+                         'position_embedding': args.position_embedding,
+                         'loss_function': args.loss_function,
+                         'chunk_size': 1,     # 查询
+                         'camera_names': camera_names,
+                         'use_depth_image': args.use_depth_image,
+                         'use_robot_base': args.use_robot_base,
+                         'hidden_dim': args.hidden_dim
+                         }
+    elif args.policy_class == 'Diffusion':
+        policy_config = {'lr': args.lr,
+                         'lr_backbone': args.lr_backbone,
+                         'backbone': args.backbone,
+                         'masks': args.masks,
+                         'weight_decay': args.weight_decay,
+                         'dilation': args.dilation,
+                         'position_embedding': args.position_embedding,
+                         'loss_function': args.loss_function,
+                         'chunk_size': args.chunk_size,     # 查询
+                         'camera_names': camera_names,
+                         'use_depth_image': args.use_depth_image,
+                         'use_robot_base': args.use_robot_base,
+                         'observation_horizon': args.observation_horizon,
+                         'action_horizon': args.action_horizon,
+                         'num_inference_timesteps': args.num_inference_timesteps,
+                         'ema_power': args.ema_power,
+                         'hidden_dim': args.hidden_dim,
+                         'select_arm': args.select_arm
+                         }
+    else:
+        raise NotImplementedError
+
+    config = {
+        'num_epochs': args.num_epochs,
+        'ckpt_dir': args.ckpt_dir,
+        'policy_class': args.policy_class,
+        'policy_config': policy_config,
+        'seed': args.seed,
+        'pretrain_ckpt_dir': args.pretrain_ckpt,
+        
+    }
+
+    # data Preprocess
+    train_dataloaders, val_dataloaders, statses, _ = load_data_kfolder(dataset_dir, num_episodes, args.arm_delay_time,
+                                                           args.use_depth_image, args.use_robot_base, camera_names,
+                                                           args.batch_size, args.batch_size)
+    # train_dataloader, val_dataloader, stats, _ = load_data_10_250(dataset_dir, num_episodes, args.arm_delay_time,
+    #                                                        args.use_depth_image, args.use_robot_base, camera_names,
+    #                                                        args.batch_size, args.batch_size)
+    
+    # k_folder
+    dataloader_length = len(train_dataloaders)
+    for i in range(dataloader_length):
+        train_dataloader = train_dataloaders[i]
+        val_dataloader = val_dataloaders[i]
+        stats = statses[i]
+        
+        
+        if not os.path.isdir(args.ckpt_dir):
+            os.makedirs(args.ckpt_dir)
+        fold_path = os.path.join(args.ckpt_dir, f'fold_{i}')
+        """args.ckpt_dir: the last letter is '/'. """
+        if not os.path.isdir(fold_path):
+            os.makedirs(fold_path)
+
+        # save dataset stats
+        stats_path = os.path.join(fold_path, args.ckpt_stats_name)
+        with open(stats_path, 'wb') as f:
+            pickle.dump(stats, f)
+
+        best_ckpt_info = train_process_fold(train_dataloader, val_dataloader, config, stats, i)
+        best_epoch, min_val_loss, best_state_dict = best_ckpt_info
+
+        # save best checkpoint
+        ckpt_path = os.path.join(fold_path, args.ckpt_name)
+        torch.save(best_state_dict, ckpt_path)
+        print(f'Fold {i}, Best ckpt, val loss {min_val_loss:.6f} @ epoch{best_epoch}')
+
+
 
 def make_policy(policy_class, policy_config, pretrain_ckpt_dir):
     if policy_class == 'ACT':
@@ -163,7 +318,13 @@ def make_optimizer(policy_class, policy):
 
 
 def forward_pass(policy_config, data, policy):
+    # print("policy config:", policy_config)
     image_data, image_depth_data, qpos_data, action_data, action_is_pad = data
+    # pdb.set_trace()
+    # if policy_config['select_arm']:
+    #     qpos_data = qpos_data[:, 7:]
+    #     action_data = action_data[:, :, 7:]
+    print("action data shape:", action_data.shape)
     (image_data, qpos_data, action_data, action_is_pad) = (image_data.cuda(), qpos_data.cuda(),
                                                            action_data.cuda(), action_is_pad.cuda())
     if policy_config['use_depth_image']:
@@ -173,14 +334,19 @@ def forward_pass(policy_config, data, policy):
     return policy(image_data, image_depth_data, qpos_data, action_data, action_is_pad)
 
 
-def train_process(train_dataloader, val_dataloader, config, stats):
+
+def train_process_fold(train_dataloader, val_dataloader, config, stats, dataloader_index):
     post_process = lambda a: a * stats['qpos_std'] + stats['qpos_mean']
     num_epochs = config['num_epochs']
     ckpt_dir = config['ckpt_dir']
+    fold_path = os.path.join(ckpt_dir, f'fold_{dataloader_index}')
     seed = config['seed']
     policy_class = config['policy_class']
     policy_config = config['policy_config']
     pretrain_ckpt_dir = config['pretrain_ckpt_dir']
+    # TODO: pretrain + kfold
+    
+    # select_arm = config['select_arm']
     set_seed(seed)
 
     policy = make_policy(policy_class, policy_config, pretrain_ckpt_dir)
@@ -191,6 +357,8 @@ def train_process(train_dataloader, val_dataloader, config, stats):
     validation_history = []
     min_val_loss = np.inf
     best_ckpt_info = None
+    actual_actions = []
+    predicted_actions = []
     for epoch in tqdm(range(num_epochs)):
         print(f'\nEpoch {epoch}')
         # validation
@@ -198,8 +366,10 @@ def train_process(train_dataloader, val_dataloader, config, stats):
             policy.eval()
             epoch_dicts = []
             for batch_idx, data in enumerate(val_dataloader):
+                # pdb.set_trace()
                 forward_dict, result = forward_pass(policy_config, data, policy)
                 # print("result:", post_process(result.cpu().detach().numpy())[0, :, 7:])
+
                 epoch_dicts.append(forward_dict)
             epoch_summary = compute_dict_mean(epoch_dicts)
             validation_history.append(epoch_summary)
@@ -224,7 +394,7 @@ def train_process(train_dataloader, val_dataloader, config, stats):
             loss = forward_dict['loss']
             loss.backward()
             optimizer.step()
-            optimizer.zero_grad()
+            optimizer.zero_grad() 
             train_history.append(detach_dict(forward_dict))
         epoch_summary = compute_dict_mean(train_history[(batch_idx+1)*epoch:(batch_idx+1)*(epoch+1)])
         epoch_train_loss = epoch_summary['loss']
@@ -237,7 +407,105 @@ def train_process(train_dataloader, val_dataloader, config, stats):
         if epoch % 100 == 0:
             ckpt_path = os.path.join(ckpt_dir, f'policy_epoch_{epoch}_seed_{seed}.ckpt')
             torch.save(policy.serialize(), ckpt_path)
+            print("ckpt saved!")
+            plot_history(train_history, validation_history, epoch, fold_path, seed)
+    
+    
+    # # val plot
+    # val_plot(actual_actions, predicted_actions)
+
+    ckpt_path = os.path.join(fold_path, f'policy_last.ckpt')
+    torch.save(policy.serialize(), ckpt_path)
+
+    best_epoch, min_val_loss, best_state_dict = best_ckpt_info
+    ckpt_path = os.path.join(fold_path, f'policy_epoch_{best_epoch}_seed_{seed}.ckpt')
+    torch.save(best_state_dict, ckpt_path)
+    print(f'Training finished:\nSeed {seed}, val loss {min_val_loss:.6f} at epoch {best_epoch}')
+
+    # save training curves
+    plot_history(train_history, validation_history, num_epochs, ckpt_dir, seed)
+
+    return best_ckpt_info
+
+
+
+
+
+def train_process(train_dataloader, val_dataloader, config, stats):
+    post_process = lambda a: a * stats['qpos_std'] + stats['qpos_mean']
+    num_epochs = config['num_epochs']
+    ckpt_dir = config['ckpt_dir']
+    seed = config['seed']
+    policy_class = config['policy_class']
+    policy_config = config['policy_config']
+    pretrain_ckpt_dir = config['pretrain_ckpt_dir']
+    # select_arm = config['select_arm']
+    set_seed(seed)
+
+    policy = make_policy(policy_class, policy_config, pretrain_ckpt_dir)
+    policy.cuda()
+    optimizer = make_optimizer(policy_class, policy)
+
+    train_history = []
+    validation_history = []
+    min_val_loss = np.inf
+    best_ckpt_info = None
+    actual_actions = []
+    predicted_actions = []
+    for epoch in tqdm(range(num_epochs)):
+        print(f'\nEpoch {epoch}')
+        # validation
+        with torch.inference_mode():
+            policy.eval()
+            epoch_dicts = []
+            for batch_idx, data in enumerate(val_dataloader):
+                # pdb.set_trace()
+                forward_dict, result = forward_pass(policy_config, data, policy)
+                # print("result:", post_process(result.cpu().detach().numpy())[0, :, 7:])
+
+                epoch_dicts.append(forward_dict)
+            epoch_summary = compute_dict_mean(epoch_dicts)
+            validation_history.append(epoch_summary)
+
+            epoch_val_loss = epoch_summary['loss']
+            if epoch_val_loss < min_val_loss:
+                min_val_loss = epoch_val_loss
+                best_ckpt_info = (epoch, min_val_loss, deepcopy(policy.serialize()))
+        print(f'Val loss:   {epoch_val_loss:.5f}')
+        summary_string = ''
+        for k, v in epoch_summary.items():
+            summary_string += f'{k}: {v.item():.3f} '
+        print(summary_string)
+
+        # training
+        policy.train()
+        optimizer.zero_grad()
+        for batch_idx, data in enumerate(train_dataloader):
+            forward_dict, result = forward_pass(policy_config, data, policy)
+            # print("result:", post_process(result.cpu().detach().numpy())[0, :, 7:])
+            # backward
+            loss = forward_dict['loss']
+            loss.backward()
+            optimizer.step()
+            optimizer.zero_grad() 
+            train_history.append(detach_dict(forward_dict))
+        epoch_summary = compute_dict_mean(train_history[(batch_idx+1)*epoch:(batch_idx+1)*(epoch+1)])
+        epoch_train_loss = epoch_summary['loss']
+        print(f'Train loss: {epoch_train_loss:.5f}')
+        summary_string = ''
+        for k, v in epoch_summary.items():
+            summary_string += f'{k}: {v.item():.3f} '
+        print(summary_string)
+
+        if epoch % 100 == 0:
+            ckpt_path = os.path.join(ckpt_dir, f'policy_epoch_{epoch}_seed_{seed}.ckpt')
+            torch.save(policy.serialize(), ckpt_path)
+            print("ckpt saved!")
             plot_history(train_history, validation_history, epoch, ckpt_dir, seed)
+    
+    
+    # # val plot
+    # val_plot(actual_actions, predicted_actions)
 
     ckpt_path = os.path.join(ckpt_dir, f'policy_last.ckpt')
     torch.save(policy.serialize(), ckpt_path)
@@ -277,7 +545,7 @@ def get_arguments():
     parser.add_argument('--num_episodes', action='store', type=int, help='num_episodes', required=True)
    
     parser.add_argument('--pretrain_ckpt', action='store', type=str, help='pretrain_ckpt', default='', required=False)
-    parser.add_argument('--task_name', action='store', type=str, help='task_name', default='aloha_mobile_dummy', required=False)
+    parser.add_argument('--task_name', action='store', type=str, help='task_name', default='single_arm_bottle2', required=False)
     
     parser.add_argument('--ckpt_name', action='store', type=str, help='ckpt_name', default='policy_best.ckpt', required=False)
     parser.add_argument('--ckpt_stats_name', action='store', type=str, help='ckpt_stats_name', default='dataset_stats.pkl', required=False)
@@ -304,6 +572,7 @@ def get_arguments():
     parser.add_argument('--nheads', action='store', type=int, help='nheads', default=8, required=False)
     parser.add_argument('--dropout', default=0.1, type=float, help="Dropout applied in the transformer", required=False)
     parser.add_argument('--pre_norm', action='store_true', required=False)
+    parser.add_argument('--select_arm', action='store', type=str, help='select right arm to train', default='right', required=False)
 
     # for ACT
     parser.add_argument('--kl_weight', action='store', type=int, help='KL Weight', default=10, required=False)
@@ -330,8 +599,11 @@ def get_arguments():
 
 def main():
     args = get_arguments()
+    # train_kfold(args)
     train(args)
+
 
 if __name__ == '__main__':
     main()
 # python act/train.py --dataset_dir ~/data --pretrain_ckpt policy_best.ckpt --ckpt_dir ~/train_dir/ --num_episodes 20 --batch_size 10 --num_epochs 2000 
+

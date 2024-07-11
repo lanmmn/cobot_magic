@@ -402,7 +402,8 @@ def build_diffusion(args):
     if args.use_robot_base:
         state_dim = 16  # TODO hardcode
     else:
-        state_dim = 14
+        # state_dim = 14
+        state_dim = 7
 
     # From state
     # backbone = None # from state for now, no need for conv nets

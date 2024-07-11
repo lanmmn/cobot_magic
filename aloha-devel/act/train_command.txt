@@ -1,0 +1,13 @@
+训练策略：
+bs4，epi353，chunk size32， lr2e-5， lr_backbone1e-5
+python train.py  --dataset_dir /home/jyxc/GitHub/act-plus-plus/data  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_bottle2_right_cs32_epi350_2camera_240frame_lr2_lrbb1  --num_epochs 2000   --batch_size 4  --num_episodes 353 --task_name single_arm_bottle2-post --chunk_size 32  --lr 2e-5 --lr_backbone 1e-5
+
+bs4，epi353，chunk size32， lr1e-5， lr_backbone1e-5
+
+
+
+python train.py  --dataset_dir /media/jyxc/Aloha/  --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_pumkin_pick_clean_right_cs32_epi55_1camera_140frame_bs8_lr2_lrbb2  --num_epochs 2000   --batch_size 8  --num_episodes 54 --task_name pumkin_pick_clean-post --chunk_size 32  --lr 2e-5 --lr_backbone 2e-5 
+
+
+
+python train.py  --dataset_dir /home/jyxc/Datasets/megvii_aloha --ckpt_dir /home/jyxc/GitHub/act-plus-plus/trainings_our_pumkin_pick_clean_right_cs32_epi55_1camera_140frame_bs8_lr2_lrbb2_addDirtyData  --num_epochs 2000   --batch_size 8  --num_episodes 55 --task_name pumkin_pick-post --chunk_size 32  --lr 2e-5 --lr_backbone 2e-5

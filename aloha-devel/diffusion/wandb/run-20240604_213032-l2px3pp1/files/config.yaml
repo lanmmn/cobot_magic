@@ -1,0 +1,55 @@
+wandb_version: 1
+
+pred_horizon:
+  desc: null
+  value: 8
+obs_horizon:
+  desc: null
+  value: 2
+num_epochs:
+  desc: null
+  value: 5000
+train_batch_size:
+  desc: null
+  value: 4
+Eval_batch_size:
+  desc: null
+  value: 4
+max_episode:
+  desc: null
+  value: 350
+_wandb:
+  desc: null
+  value:
+    python_version: 3.8.19
+    cli_version: 0.16.6
+    framework: huggingface
+    huggingface_version: 4.39.3
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1717507832.0
+    t:
+      1:
+      - 1
+      - 11
+      - 41
+      - 49
+      - 55
+      - 83
+      2:
+      - 1
+      - 11
+      - 41
+      - 49
+      - 55
+      - 83
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.8.19
+      5: 0.16.6
+      6: 4.39.3
+      8:
+      - 5
+      13: linux-x86_64

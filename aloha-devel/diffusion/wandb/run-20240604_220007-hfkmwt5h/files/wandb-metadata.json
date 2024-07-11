@@ -1,0 +1,227 @@
+{
+    "os": "Linux-6.5.0-28-generic-x86_64-with-glibc2.10",
+    "python": "3.8.19",
+    "heartbeatAt": "2024-06-04T14:00:08.021746",
+    "startedAt": "2024-06-04T14:00:07.052102",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--dataset_dir",
+        "/home/jyxc/GitHub/act-plus-plus/data",
+        "--ckpt_dir",
+        "/home/jyxc/GitHub/cobot_magic/aloha-devel/diffusion/model_save",
+        "--batch_size",
+        "4",
+        "--num_epochs",
+        "5000",
+        "--num_episodes",
+        "350",
+        "--task_name",
+        "single_arm_bottle2-post",
+        "--policy_class",
+        "Diffusion",
+        "--select_arm",
+        "right",
+        "--observation_horizon",
+        "2"
+    ],
+    "state": "running",
+    "program": "train.py",
+    "codePathLocal": "train.py",
+    "codePath": "aloha-devel/diffusion/train.py",
+    "git": {
+        "remote": "https://github.com/agilexrobotics/cobot_magic.git",
+        "commit": "105b4f356de06747baafe243962e6a8b49fc0436"
+    },
+    "email": "maoweixin@megvii.com",
+    "root": "/home/jyxc/GitHub/cobot_magic",
+    "host": "jyxc-LEGION-REN9000K-34IRZ",
+    "username": "jyxc",
+    "executable": "/home/jyxc/mambaforge/envs/aloha/bin/python",
+    "cpu_count": 24,
+    "cpu_count_logical": 32,
+    "cpu_freq": {
+        "current": 1495.0782812500001,
+        "min": 800.0,
+        "max": 4937.5
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 884.851,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 862.295,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 2930.866,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 1454.356,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 2202.887,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 2390.412,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 1315.267,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 3000.0,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 3003.68,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 2818.751,
+            "min": 800.0,
+            "max": 5800.0
+        },
+        {
+            "current": 2836.031,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 2085.743,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 5500.0
+        },
+        {
+            "current": 2108.495,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 1318.413,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 1324.056,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 2212.223,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 994.459,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 1079.321,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 1358.997,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 1158.015,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 1461.99,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        },
+        {
+            "current": 800.0,
+            "min": 800.0,
+            "max": 4300.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 1674.6598739624023,
+            "used": 1413.7286529541016
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4090",
+            "memory_total": 25757220864
+        }
+    ],
+    "memory": {
+        "total": 62.48347854614258
+    }
+}
